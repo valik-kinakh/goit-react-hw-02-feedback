@@ -3,25 +3,22 @@ import Proptypes from 'prop-types';
 import s from './FeedbackOptions.module.css';
 import Button from '../common/Button';
 
-const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+const FeedbackOptions = ({ onLeaveFeedback }) => {
   const onGoodOptionClick = () => {
     onLeaveFeedback({
-      ...options,
-      good: (options.good += 1),
+      type: 'good',
     });
   };
 
   const onNeutralOptionClick = () => {
     onLeaveFeedback({
-      ...options,
-      neutral: (options.neutral += 1),
+      type: 'neutral',
     });
   };
 
   const onBadOptionClick = () => {
     onLeaveFeedback({
-      ...options,
-      bad: (options.bad += 1),
+      type: 'bad',
     });
   };
 
@@ -35,11 +32,6 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
 };
 
 FeedbackOptions.propTypes = {
-  options: Proptypes.shape({
-    good: Proptypes.number,
-    neutral: Proptypes.number,
-    bad: Proptypes.number,
-  }).isRequired,
   onLeaveFeedback: Proptypes.func.isRequired,
 };
 

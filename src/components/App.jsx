@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
+import { feedbackReducer } from '../store/feedbackReducer';
 
 export const App = () => {
-  const [feedbacks, setFeedbacks] = useState({
+  const [feedbacks, dispatch] = useReducer(feedbackReducer, {
     good: 0,
     neutral: 0,
     bad: 0,
@@ -24,7 +25,7 @@ export const App = () => {
   return (
     <div className="app">
       <Section title="Please leave feedback">
-        <FeedbackOptions options={feedbacks} onLeaveFeedback={setFeedbacks} />
+        <FeedbackOptions onLeaveFeedback={dispatch} />
       </Section>
       <Section title="Statistics">
         <Statistics
