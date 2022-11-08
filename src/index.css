@@ -19,3 +19,8 @@ ol {
 a {
   text-decoration: none;
 }
+
+.app{
+  font-family: "Montserrat",sans-serif;
+  padding: 30px;
+}
