@@ -3,6 +3,7 @@ import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 import { feedbackReducer } from '../store/feedbackReducer';
+import Notification from './Notificaton';
 
 export const App = () => {
   const [feedbacks, dispatch] = useReducer(feedbackReducer, {
@@ -22,19 +23,25 @@ export const App = () => {
     return +result.toFixed(0);
   };
 
+  const isStatisticProvided = countTotalFeedback() > 0;
+
   return (
     <div className="app">
       <Section title="Please leave feedback">
         <FeedbackOptions onLeaveFeedback={dispatch} />
       </Section>
       <Section title="Statistics">
-        <Statistics
-          good={feedbacks.good}
-          neutral={feedbacks.neutral}
-          bad={feedbacks.bad}
-          total={countTotalFeedback()}
-          positivePercentage={countPositiveFeedbackPercentage()}
-        />
+        {isStatisticProvided ? (
+          <Statistics
+            good={feedbacks.good}
+            neutral={feedbacks.neutral}
+            bad={feedbacks.bad}
+            total={countTotalFeedback()}
+            positivePercentage={countPositiveFeedbackPercentage()}
+          />
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
       </Section>
     </div>
   );
